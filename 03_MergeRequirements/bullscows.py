@@ -3,6 +3,8 @@ from typing import Tuple, List
 import random
 from urllib import request
 from cowsay import get_random_cow, cowsay
+from pathlib import Path
+
 
 def bullscows(guess: str, secret: str) -> Tuple[int, int]:
     letters = set(secret)
@@ -21,7 +23,7 @@ def inform(format_string: str, bulls: int, cows: int) -> None:
 
     
 def ask(prompt: str, valid: List[str] = None) -> str:
-    cowfile = get_random_cow()
+    cowfile = Path(__file__).parent / "cat_in_box"
     print(cowsay(prompt, cow=cowfile))
     word = input()
     if valid:
