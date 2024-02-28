@@ -2,6 +2,7 @@ import argparse
 from typing import Tuple, List
 import random
 from urllib import request
+from cowsay import get_random_cow, cowsay
 
 def bullscows(guess: str, secret: str) -> Tuple[int, int]:
     letters = set(secret)
@@ -15,15 +16,19 @@ def bullscows(guess: str, secret: str) -> Tuple[int, int]:
     return bulls, cows
 
 def inform(format_string: str, bulls: int, cows: int) -> None:
-    print(format_string.format(bulls, cows))
+    cowfile = get_random_cow()
+    print(cowsay(format_string.format(bulls, cows), cow=cowfile))
 
     
 def ask(prompt: str, valid: List[str] = None) -> str:
-    word = input(prompt)
+    cowfile = get_random_cow()
+    print(cowsay(prompt, cow=cowfile))
+    word = input()
     if valid:
         while word not in valid:
             print("Слово не допустимо!")
-            word = input(prompt)
+            print(cowsay(prompt, cow=cowfile))
+            word = input()
     return word
 
 
